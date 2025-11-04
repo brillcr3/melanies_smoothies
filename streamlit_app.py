@@ -43,9 +43,7 @@ if ingredients_list:
         
         st.success('Your Smoothie is ordered, '+ name_on_order + "!", icon="✅")
 
-    og_dataset = session.table("smoothies.public.orders")
-    edited_dataset = session.create_dataframe(editable_df)
-    og_dataset.merge(edited_dataset
-                     , (og_dataset['ORDER_UID'] == edited_dataset['ORDER_UID'])
-                     , [when_matched().update({'ORDER_FILLED': edited_dataset['ORDER_FILLED']})]
-                    )
+    #New section to display smoothiefroot nutrition information
+    import requests
+    smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+    st.text(smoothiefroot_response)
